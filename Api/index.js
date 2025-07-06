@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import authRoute from './Routes/auth.js'
@@ -31,6 +32,8 @@ mongoose.connection.on("connected" , ()=>{
 
 
 //MIDDLEWARES
+app.use(cors())
+
 app.use(cookieParser())
 app.use(express.json())
 
@@ -54,7 +57,5 @@ const PORT = 8800
 
 app.listen(PORT, ()=>{
     connect()
-    console.log(`Server is running on http://localhost:${PORT}`);
-    
-    
+    console.log(`Server is running on http://localhost:${PORT}`);   
 })
