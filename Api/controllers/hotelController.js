@@ -1,4 +1,5 @@
 import Hotel from "../modals/Hotel.js"
+import Room from "../modals/Room.js"
 import createError from "../Utils/error.js"
 //Create
 const createHotel = async(req ,res ,next) => {
@@ -95,6 +96,19 @@ const countByType = async(req ,res ,next) => {
 
 
 
+const getHotelRooms = async (req , res , next) => {
+   try {
+      const hotel =await Hotel.findById(req.params.id)
+      const list = await Promise.all(hotel.rooms.map(room=>{
+        return Room.findById(room)
+      }));
+      res.status(200).json(list)
+   } catch (error) {
+      next(error)
+   }
+}
+
+
 
 export {
     createHotel,
@@ -103,5 +117,6 @@ export {
     getHotel,
     getHotels,
     countByCity,
-    countByType
+    countByType,
+    getHotelRooms
 }

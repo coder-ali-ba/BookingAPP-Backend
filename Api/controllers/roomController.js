@@ -37,6 +37,15 @@ const updateRoom = async(req ,res ,next) =>{
     }
 }
 
+const updateRoomAvailability = async(req ,res ,next) =>{
+    try {
+        
+        res.status(200).json(updatedRoom)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 //DELETE
 const deleteRoom = async(req ,res ,next) => {
   const hotelId = req.params.hotelId
